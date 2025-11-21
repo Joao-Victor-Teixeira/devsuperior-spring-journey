@@ -4,7 +4,9 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import entities.Employee;
+import services.PensionService;
 import services.SalaryService;
+import services.TaxService;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -19,7 +21,9 @@ public class App {
 
         Employee employee = new Employee(name, grossSalary);
 
-        SalaryService salaryService = new SalaryService();
+        TaxService taxService = new TaxService();
+        PensionService pensionService = new PensionService();
+        SalaryService salaryService = new SalaryService(taxService, pensionService);
 
 
         double netSalary = salaryService.netSalary(employee);
