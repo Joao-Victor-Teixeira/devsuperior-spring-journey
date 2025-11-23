@@ -1,0 +1,13 @@
+package com.joaodev.order_processing_logistics;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class OrderProcessingLogisticsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(OrderProcessingLogisticsApplication.class, args);
+	}
+
+}
