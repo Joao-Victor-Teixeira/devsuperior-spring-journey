@@ -10,4 +10,6 @@ public class OrmDomainModelChallengeApplication {
 		SpringApplication.run(OrmDomainModelChallengeApplication.class, args);
 	}
 
+	
+
 }
