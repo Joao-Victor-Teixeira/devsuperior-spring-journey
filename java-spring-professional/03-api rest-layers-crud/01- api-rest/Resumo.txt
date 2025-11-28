@@ -1,0 +1,102 @@
+📚 Resumo: Arquitetura em Camadas & Padrão REST
+1. O Fluxo da Informação (O Caminho do Dado)
+Imagine que o dado é um cliente num restaurante:
+
+Front End (Cliente): Faz o pedido via JSON/HTTP.
+
+Controller (Garçom):
+
+Função: Recebe a requisição, valida o básico e passa para a cozinha.
+
+Língua: Fala HTTP (Status 200, 404, 201).
+
+Regra: Não tem regra de negócio. Só entrega.
+
+Service (Cozinha/Chef):
+
+Função: É aqui que a mágica acontece. Cálculos, validações lógicas, regras.
+
+Transação: Tudo o que acontece aqui é atômico (tudo ou nada).
+
+Repository (Despensa/Estoquista):
+
+Função: Vai buscar ou guardar os dados no banco.
+
+Ferramenta: JPA / Hibernate.
+
+2. O Padrão DTO (Data Transfer Object)
+É a "Bandeja" do garçom.
+
+Problema: Não queremos entregar a panela suja (Entidade com senhas, dados sensíveis ou loops infinitos) para o cliente.
+
+Solução: Copiamos os dados da Entidade para um DTO (objeto simples, só com o que interessa) e entregamos o DTO.
+
+3. Os Verbos HTTP (O Cardápio)
+GET: Buscar (Idempotente - não muda nada).
+
+POST: Criar (Não idempotente - cria novo sempre).
+
+PUT: Atualizar (Idempotente - substitui o recurso).
+
+DELETE: Remover.
+
+
+📚 Resumo: Primeiros Passos na API REST (Testes Iniciais)
+1. O Conceito: Recurso vs. Controlador
+Recurso (Resource): É o conceito abstrato, a "coisa" que queremos disponibilizar na Web (ex: Produto, Usuário).
+
+Controlador (Controller): É a classe Java que implementa esse recurso. É quem recebe as requisições e devolve as respostas.
+
+2. Configurando o Controlador (@RestController)
+Para transformar uma classe Java comum num endpoint web, usamos duas anotações principais:
+
+@RestController: Avisa ao Spring: "Esta classe vai responder à Web".
+
+O que faz: Combina @Controller (registra o componente) com @ResponseBody (diz que o retorno dos métodos deve ser serializado para JSON/Texto e ir direto para o corpo da resposta HTTP).
+
+@RequestMapping(value = "/products"): Define a Rota Base.
+
+Exemplo: Tudo o que estiver nesta classe vai responder em http://localhost:8080/products.
+
+3. O Repositório (Repository)
+É o componente responsável por acessar o banco de dados.
+
+Como criar: Basta criar uma Interface que estende JpaRepository<Entidade, TipoId>.
+
+A Mágica: O Spring Data JPA cria a implementação dessa interface em tempo de execução. Tu não precisas escrever o SQL SELECT * FROM..., ele já traz métodos prontos como findById, findAll, save, delete.
+
+
+
+
+			                _____________________________	
+					|       FRONT END(APP)      |
+					|___________________________|
+						     |
+						     | JSON(Requisições HTTP/REST)
+						     V
+===================================================================================================================================
+|	B                                   |                          |                                                          | 
+|	A                                   |   CONTROLADORES REST     |                                                          |
+|	C                                   |  			       |                                                          |
+|	K                                   ===========================  							  |
+|						    | Data Transfer Objects(DTO)						  |
+|	E	                                    V										  |
+|       N                _________________________________________________________________			                  |
+|    	D		|                                                                 |                                       |
+|			|		   ____________________________                   |					  |
+|			|                  |			      |	                  | 					  |
+|			|		   |    CAMADA DE SERVIÇO     |	      		  |					  |
+|			|		   |__________________________|			  |    				          |
+|                       |                                  ^                              |					  |
+|                       |                                  |  ENTIDADES/ ORM              |					  |
+|                       |                                  v                              |					  |
+|                       |                    ____________________________        Transação| 					  |
+|                       |                    |                           |                |					  |
+|                       |                    |  CAMADA DE ACESSO A DADOS |                |					  |
+|                       |                    |___________________________|                |					  |
+|			|_________________________________________________________________|   					  |
+|_________________________________________________________________________________________________________________________________|
+
+
+
+
