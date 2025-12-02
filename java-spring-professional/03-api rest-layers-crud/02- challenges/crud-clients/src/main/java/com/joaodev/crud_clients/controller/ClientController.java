@@ -1,5 +1,7 @@
 package com.joaodev.crud_clients.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,9 +14,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.joaodev.crud_clients.dto.ClientDTO;
 import com.joaodev.crud_clients.services.ClientService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/clients")
@@ -36,12 +41,15 @@ public class ClientController {
     }
 
     @PostMapping
-    public ClientDTO insert(@RequestBody ClientDTO dto){
-        return service.insert(dto);
+    public ResponseEntity<ClientDTO> insert(@Valid @RequestBody ClientDTO dto){
+        dto = service.insert(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/{id}").buildAndExpand(dto.getId()).toUri();
+        return ResponseEntity.created(uri).body(dto);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO dto){
+    public ResponseEntity<ClientDTO> update(@PathVariable Long id, @Valid @RequestBody ClientDTO dto){
         dto = service.update(id, dto);
         return ResponseEntity.ok(dto);
     }
