@@ -20,7 +20,7 @@ public class ClientDTO {
     this.income = client.getIncome();
     this.birthDate = client.getBirthDate();
     this.children = client.getChildren();
-}
+    }
 
     public ClientDTO(Long id, String name, String cpf, Double income, LocalDate birthDate, Integer children) {
         this.id = id;
