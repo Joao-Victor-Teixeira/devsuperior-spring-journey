@@ -54,7 +54,7 @@ public class Person {
         return department;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartment(Department dep) {
+        this.department = dep;
     }
 }
