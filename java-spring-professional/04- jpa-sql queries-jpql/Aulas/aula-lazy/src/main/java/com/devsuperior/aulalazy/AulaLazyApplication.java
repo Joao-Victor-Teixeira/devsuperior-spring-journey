@@ -10,4 +10,5 @@ public class AulaLazyApplication {
 		SpringApplication.run(AulaLazyApplication.class, args);
 	}
 	
+	
 }
