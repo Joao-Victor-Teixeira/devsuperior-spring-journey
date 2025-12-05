@@ -2,7 +2,6 @@ package com.devsuperior.aula.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.devsuperior.aula.entities.Category;
 import com.devsuperior.aula.entities.Product;
