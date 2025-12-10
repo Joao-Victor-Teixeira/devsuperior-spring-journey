@@ -9,6 +9,10 @@ public class CustomerMinDTO {
     public CustomerMinDTO(){
     }
 
+    public CustomerMinDTO(String name){
+        this.name = name;
+    }
+
     public CustomerMinDTO(CustomerMinProjection projection) {
         name = projection.getName();
     }
@@ -25,6 +29,4 @@ public class CustomerMinDTO {
     public String toString() {
         return "CustomerMinDTO [name=" + name + "]";
     }
-
-    
 }
