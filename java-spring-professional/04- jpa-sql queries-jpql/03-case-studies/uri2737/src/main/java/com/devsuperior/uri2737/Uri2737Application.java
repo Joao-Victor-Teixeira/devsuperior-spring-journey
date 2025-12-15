@@ -32,6 +32,6 @@ public class Uri2737Application implements CommandLineRunner {
 		for (LawyerMinDTO obj : result1) {
 			System.out.println(obj);
 		}
-		System.out.println("\n\n");
+		System.out.println("Hello Word!");
 	}
 }
