@@ -5,7 +5,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.joaodev.dscatalog.dto.CategoryDTO;
@@ -13,6 +15,7 @@ import com.joaodev.dscatalog.entities.Category;
 
 import com.joaodev.dscatalog.exceptions.ResourceNotFoundException;
 import com.joaodev.dscatalog.repositories.CategoryRepository;
+import com.joaodev.dscatalog.services.exceptions.DatabaseException;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -54,4 +57,18 @@ public class CategoryService {
         throw new ResourceNotFoundException("Id não encontrado" + id);
       }
     }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void delete(Long id){
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("Recurso não encontrado");
+        }
+        try{
+            repository.deleteById(id);
+        }
+        catch(DataIntegrityViolationException e){
+            throw new DatabaseException("Falha de integridade referencial");
+        }
+    }
 }
+
