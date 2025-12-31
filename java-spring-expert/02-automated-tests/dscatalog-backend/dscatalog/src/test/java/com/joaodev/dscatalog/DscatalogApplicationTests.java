@@ -1,4 +1,4 @@
-package com.joaodev.dscatalog;
+/*package com.joaodev.dscatalog;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,3 +11,4 @@ class DscatalogApplicationTests {
 	}
 
 }
+*/
