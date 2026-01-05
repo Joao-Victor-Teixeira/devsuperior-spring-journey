@@ -1,5 +1,10 @@
 package com.devsuperior.bds04.entities;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_role")
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +36,7 @@ public class Role {
         this.id = id;
     }
 
+    @Override
     public String getAuthority() {
         return authority;
     }
@@ -63,6 +69,5 @@ public class Role {
             return false;
         return true;
     }
-
-    
+  
 }
