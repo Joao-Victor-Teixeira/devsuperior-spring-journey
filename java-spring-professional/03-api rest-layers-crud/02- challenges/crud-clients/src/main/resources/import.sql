@@ -1,0 +1,10 @@
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('João Víctor', '12345678901', 6500.0, '1994-07-20', 2);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Inaê Araújo', '10987654321', 2500.0, '1970-05-15', 0);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Lara Araújo', '98765432100', 4200.0, '2000-02-28', 1);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Márcio Rossi', '56473829102', 12000.0, '1985-11-10', 3);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Valéria Aparecida', '11122233344', 8500.0, '1990-09-02', 0);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Carlos Silveira', '55566677788', 3100.0, '1955-01-30', 4);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Alice Oliveira', '99988877766', 15000.0, '1965-10-16', 2);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Clarisse Rossi', '22233344455', 5400.0, '1982-04-22', 1);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Joaquim Araújo', '77788899900', 9200.0, '1995-12-25', 0);
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Isabela Turqueti', '44455566611', 7800.0, '1978-08-05', 2);
