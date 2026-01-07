@@ -15,6 +15,9 @@ public class EmailDTO {
     @NotBlank
     private String body;
 
+	public EmailDTO(){
+	}
+
 	public String getTo() {
 		return to;
 	}
