@@ -37,6 +37,7 @@ public class ReviewDTO {
         movieId = entity.getMovie().getId();
         userId = entity.getUser().getId();
         userName = entity.getUser().getName();
+		userEmail = entity.getUser().getEmail();
     }
 
 	public Long getId() {

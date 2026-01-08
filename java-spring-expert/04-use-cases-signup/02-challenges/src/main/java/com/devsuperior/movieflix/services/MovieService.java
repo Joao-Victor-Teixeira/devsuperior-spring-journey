@@ -22,7 +22,7 @@ public class MovieService {
 
     @Transactional(readOnly = true)
     public Page<MovieCardDTO> findAllPaged(Long genreId, Pageable pageable) {
-        Long finalGenreId = (genreId == 0) ? null : genreId;
+        Long finalGenreId = (genreId == null) ? 0L : genreId;
     
         Page<Movie> page = repository.find(finalGenreId, pageable);
         repository.find(finalGenreId, pageable);
