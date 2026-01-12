@@ -19,6 +19,11 @@ public class ScoreEntity {
 	
 	public ScoreEntity() {
 	}
+
+	public ScoreEntity(ScoreEntityPK id, Double value) {
+		this.id = id;
+		this.value = value;
+	}
 	
 	public void setMovie(MovieEntity movie) {
 		id.setMovie(movie);
@@ -60,4 +65,6 @@ public class ScoreEntity {
 		ScoreEntity other = (ScoreEntity) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 }
