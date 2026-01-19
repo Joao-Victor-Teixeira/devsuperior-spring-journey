@@ -1,5 +1,8 @@
 package com.devsuperior.dsmovie.services;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.devsuperior.dsmovie.controllers.MovieController;
 import com.devsuperior.dsmovie.dto.MovieDTO;
 import com.devsuperior.dsmovie.entities.MovieEntity;
 import com.devsuperior.dsmovie.repositories.MovieRepository;
@@ -25,7 +29,8 @@ public class MovieService {
 	@Transactional(readOnly = true)
 	public Page<MovieDTO> findAll(Pageable pageable) {
 		Page<MovieEntity> result = repository.findAll(pageable);
-		Page<MovieDTO> page = result.map(x -> new MovieDTO(x));
+		Page<MovieDTO> page = result.map(x -> new MovieDTO(x).add(linkTo(methodOn(MovieController.class).findAll(null)).withSelfRel())
+										.add(linkTo(methodOn(MovieController.class).findById(x.getId())).withRel("GET - Movie by Id")));
 		return page;
 	}
 
@@ -33,7 +38,11 @@ public class MovieService {
 	public MovieDTO findById(Long id) {
 		MovieEntity result = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
-		return new MovieDTO(result);
+		MovieDTO dto = new MovieDTO(result).add(linkTo(methodOn(MovieController.class).findById(id)).withSelfRel())
+					.add(linkTo(methodOn(MovieController.class).findAll(null)).withRel("GET - All movies"))
+					.add(linkTo(methodOn(MovieController.class).update(id, null)).withRel("Update movie"))
+					.add(linkTo(methodOn(MovieController.class).delete(id)).withRel("Delete movie"));
+		return dto;
 	}
 
 	@Transactional
@@ -41,7 +50,7 @@ public class MovieService {
 		MovieEntity entity = new MovieEntity();
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
-		return new MovieDTO(entity);
+		return new MovieDTO(entity).add(linkTo(methodOn(MovieController.class).findById(entity.getId())).withRel("GET - Movie by Id"));
 	}
 
 	@Transactional
@@ -50,7 +59,7 @@ public class MovieService {
 			MovieEntity entity = repository.getReferenceById(id);
 			copyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
-			return new MovieDTO(entity);
+			return new MovieDTO(entity).add(linkTo(methodOn(MovieController.class).findById(entity.getId())).withRel("GET - Movie by Id"));
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Recurso não encontrado");
 		}
