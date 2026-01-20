@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.joaodev.workshop_mongo.models.dto.PostDTO;
 import com.joaodev.workshop_mongo.models.dto.UserDTO;
-import com.joaodev.workshop_mongo.models.entities.Post;
 import com.joaodev.workshop_mongo.models.entities.User;
 import com.joaodev.workshop_mongo.repositories.UserRepository;
 import com.joaodev.workshop_mongo.services.exceptions.ResourceNotFoundException;
