@@ -2,11 +2,18 @@ package com.joaodev.workshop_mongo.models.dto;
 
 import com.joaodev.workshop_mongo.models.entities.User;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class UserDTO {
 
+    @Schema(description = "ID único do usuário (Hexadecimal MongoDB)", example = "65ae8f2b1a4d5e0012345678")
     private String id;
-	private String name;
-	private String email;
+	
+    @Schema(description = "Nome completo do usuário", example = "João")
+    private String name;
+	
+    @Schema(description = "Endereço de e-mail do usuário", example = "joao@dev.com")
+    private String email;
 
     public UserDTO(){
     }
