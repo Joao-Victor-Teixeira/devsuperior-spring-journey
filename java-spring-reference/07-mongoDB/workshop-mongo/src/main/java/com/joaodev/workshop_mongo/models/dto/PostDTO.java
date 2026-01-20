@@ -8,14 +8,26 @@ import com.joaodev.workshop_mongo.models.entities.Post;
 import com.joaodev.workshop_mongo.models.entities.embedded.Author;
 import com.joaodev.workshop_mongo.models.entities.embedded.Comment;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class PostDTO {
 
+    @Schema(description = "ID único da postagem", example = "65bf12345a4d5e0012345679")
     private String id;
-	private Instant moment;
-	private String title;
-	private String body;
-	private Author author;
+	
+    @Schema(description = "Data da publicação (ISO 8601)", example = "2024-05-20T14:30:00Z")
+    private Instant moment;
+	
+    @Schema(description = "Título da postagem", example = "Partiu viagem!")
+    private String title;
+	
+    @Schema(description = "Conteúdo/Corpo da postagem", example = "Hoje comecei meu novo projeto usando Spring Batch...")
+    private String body;
+	
+    @Schema(description = "Autor da postagem (Dados simplificados)")
+    private Author author;
 
+    @Schema(description = "Lista de comentários da postagem")
     private List<Comment> comments = new ArrayList<>();
 
     public PostDTO(){
